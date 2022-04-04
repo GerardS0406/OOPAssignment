@@ -1,6 +1,6 @@
 /*
 * Gerard Lamoureux
-* 5B
+* 6
 * Handles Collectable Papers to Win Game
 */
 
@@ -8,24 +8,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectableCoin : MonoBehaviour
+public class CollectableCoin : Collectables
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        gameObject.transform.Rotate(0,1,0);
-    }
-
+    public int scoreReceived;
     void OnTriggerEnter(Collider theCollider)
     {
         if (theCollider.CompareTag ("Player")) {
-            GameManager.Instance.score++;
-            Destroy(gameObject);
+            collectItem(scoreReceived);
         }
+    }
+    public override void collectItem(int score)
+    {
+        GameManager.Instance.score += score;
+        Destroy(gameObject);
     }
 }

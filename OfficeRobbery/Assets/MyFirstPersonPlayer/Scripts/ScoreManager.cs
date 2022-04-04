@@ -1,6 +1,6 @@
 /*
 * Gerard Lamoureux
-* 5B
+* 6
 * Handles Score and Score UI
 */
 
@@ -12,10 +12,12 @@ using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
     private Text textbox;
+    public int startScore = 0;
     // Start is called before the first frame update
     void Start()
     {
         textbox = gameObject.GetComponent<Text>();
+        GameManager.Instance.score = startScore;
     }
 
     // Update is called once per frame

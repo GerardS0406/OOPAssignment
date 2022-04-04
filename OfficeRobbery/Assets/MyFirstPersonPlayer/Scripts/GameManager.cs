@@ -7,6 +7,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -14,16 +15,12 @@ public class GameManager : Singleton<GameManager>
     public int score = 0;
 
     public GameObject pauseMenu;
+    public GameObject retryMenu;
 
     //variable to keep track of current level
     private string CurrentLevelName = string.Empty;
 
     //methods to load/unload scenes
-
-    public void SetScore(int n)
-    {
-        score = n;
-    }
 
     public void LoadLevel(string levelName)
     {
@@ -58,7 +55,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !retryMenu.activeSelf)
             Pause();
     }
 
@@ -72,6 +69,26 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        retryMenu.SetActive(false);
+    }
+
+    public void OutofTime()
+    {
+        Time.timeScale = 0f;
+        retryMenu.SetActive(true);
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+        UnloadCurrentLevel();
+        LoadLevel(CurrentLevelName);
+        retryMenu.SetActive(false);
+    }
+
+    public void PlayerWin()
+    {
+
     }
 
 }

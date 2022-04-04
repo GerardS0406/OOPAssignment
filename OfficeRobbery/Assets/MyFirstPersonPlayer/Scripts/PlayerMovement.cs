@@ -1,6 +1,6 @@
 /*
 * Gerard Lamoureux
-* 5B
+* 6
 * Handles First Person Movement
 */
 
